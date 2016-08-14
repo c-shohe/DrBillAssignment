@@ -65,7 +65,8 @@ extension SearchViewLogic: UITableViewDataSource {
 extension SearchViewLogic: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        API.getMusicRequest(searchText)
+        //API.getMusicRequest(searchText)
+        API.getBookRequest(searchText)
     }
     
     

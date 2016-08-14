@@ -19,8 +19,14 @@ final class API {
         
     }
     
-    static func getMusicRequest(name: String) {
-        Alamofire.request(.GET, "https://itunes.apple.com/search?term=\(name)&media=music&entity=song&country=us&lang=en_us&limit=10").responseJSON { response in
+    static func getMusicRequest(key: String) {
+        Alamofire.request(.GET, "https://itunes.apple.com/search?term=\(key)&media=music&entity=song&country=us&lang=en_us&limit=10").responseJSON { response in
+            print("response: \(response)")
+        }
+    }
+    
+    static func getBookRequest(key: String) {
+        Alamofire.request(.GET, "https://www.googleapis.com/books/v1/volumes?q=\(key)&country=US").responseJSON { response in
             print("response: \(response)")
         }
     }
