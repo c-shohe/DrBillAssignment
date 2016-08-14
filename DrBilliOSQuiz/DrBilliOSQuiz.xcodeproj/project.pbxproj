@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		09383B941D5FDAFD00F5EF50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09383B931D5FDAFD00F5EF50 /* AppDelegate.swift */; };
-		09383B961D5FDAFD00F5EF50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09383B951D5FDAFD00F5EF50 /* ViewController.swift */; };
 		09383B991D5FDAFD00F5EF50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09383B971D5FDAFD00F5EF50 /* Main.storyboard */; };
 		09383B9B1D5FDAFD00F5EF50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09383B9A1D5FDAFD00F5EF50 /* Assets.xcassets */; };
 		09383B9E1D5FDAFD00F5EF50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09383B9C1D5FDAFD00F5EF50 /* LaunchScreen.storyboard */; };
 		09383BA91D5FDAFD00F5EF50 /* DrBilliOSQuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09383BA81D5FDAFD00F5EF50 /* DrBilliOSQuizTests.swift */; };
 		09383BB41D5FDAFD00F5EF50 /* DrBilliOSQuizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09383BB31D5FDAFD00F5EF50 /* DrBilliOSQuizUITests.swift */; };
+		09383BC61D5FDBBB00F5EF50 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09383BC51D5FDBBB00F5EF50 /* SearchViewController.swift */; };
+		09383BC81D5FDBEA00F5EF50 /* SearchViewLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09383BC71D5FDBEA00F5EF50 /* SearchViewLogic.swift */; };
+		09383BCA1D5FDC0600F5EF50 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09383BC91D5FDC0600F5EF50 /* API.swift */; };
+		09A927D21D606B260036C08C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A927D11D606B260036C08C /* Alamofire.framework */; };
+		09A927D41D606BE90036C08C /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 09A927D11D606B260036C08C /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		09A927D71D606C210036C08C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A927D61D606C210036C08C /* SwiftyJSON.framework */; };
+		09A927D81D606C210036C08C /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 09A927D61D606C210036C08C /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,10 +39,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		09A927D51D606BE90036C08C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				09A927D81D606C210036C08C /* SwiftyJSON.framework in Embed Frameworks */,
+				09A927D41D606BE90036C08C /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		09383B901D5FDAFD00F5EF50 /* DrBilliOSQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrBilliOSQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09383B931D5FDAFD00F5EF50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		09383B951D5FDAFD00F5EF50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		09383B981D5FDAFD00F5EF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		09383B9A1D5FDAFD00F5EF50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09383B9D1D5FDAFD00F5EF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +67,11 @@
 		09383BAF1D5FDAFD00F5EF50 /* DrBilliOSQuizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrBilliOSQuizUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09383BB31D5FDAFD00F5EF50 /* DrBilliOSQuizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrBilliOSQuizUITests.swift; sourceTree = "<group>"; };
 		09383BB51D5FDAFD00F5EF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09383BC51D5FDBBB00F5EF50 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		09383BC71D5FDBEA00F5EF50 /* SearchViewLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewLogic.swift; sourceTree = "<group>"; };
+		09383BC91D5FDC0600F5EF50 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		09A927D11D606B260036C08C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		09A927D61D606C210036C08C /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A927D71D606C210036C08C /* SwiftyJSON.framework in Frameworks */,
+				09A927D21D606B260036C08C /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +104,7 @@
 		09383B871D5FDAFD00F5EF50 = {
 			isa = PBXGroup;
 			children = (
+				09383BCF1D60551500F5EF50 /* Frameworks */,
 				09383B921D5FDAFD00F5EF50 /* DrBilliOSQuiz */,
 				09383BA71D5FDAFD00F5EF50 /* DrBilliOSQuizTests */,
 				09383BB21D5FDAFD00F5EF50 /* DrBilliOSQuizUITests */,
@@ -97,8 +125,8 @@
 		09383B921D5FDAFD00F5EF50 /* DrBilliOSQuiz */ = {
 			isa = PBXGroup;
 			children = (
+				09383BC11D5FDB3E00F5EF50 /* App */,
 				09383B931D5FDAFD00F5EF50 /* AppDelegate.swift */,
-				09383B951D5FDAFD00F5EF50 /* ViewController.swift */,
 				09383B971D5FDAFD00F5EF50 /* Main.storyboard */,
 				09383B9A1D5FDAFD00F5EF50 /* Assets.xcassets */,
 				09383B9C1D5FDAFD00F5EF50 /* LaunchScreen.storyboard */,
@@ -125,6 +153,49 @@
 			path = DrBilliOSQuizUITests;
 			sourceTree = "<group>";
 		};
+		09383BC11D5FDB3E00F5EF50 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				09383BC41D5FDB8800F5EF50 /* API */,
+				09383BC31D5FDB7700F5EF50 /* Logics */,
+				09383BC21D5FDB5C00F5EF50 /* ViewControllers */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		09383BC21D5FDB5C00F5EF50 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				09383BC51D5FDBBB00F5EF50 /* SearchViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		09383BC31D5FDB7700F5EF50 /* Logics */ = {
+			isa = PBXGroup;
+			children = (
+				09383BC71D5FDBEA00F5EF50 /* SearchViewLogic.swift */,
+			);
+			path = Logics;
+			sourceTree = "<group>";
+		};
+		09383BC41D5FDB8800F5EF50 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				09383BC91D5FDC0600F5EF50 /* API.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		09383BCF1D60551500F5EF50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				09A927D61D606C210036C08C /* SwiftyJSON.framework */,
+				09A927D11D606B260036C08C /* Alamofire.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,6 +206,7 @@
 				09383B8C1D5FDAFD00F5EF50 /* Sources */,
 				09383B8D1D5FDAFD00F5EF50 /* Frameworks */,
 				09383B8E1D5FDAFD00F5EF50 /* Resources */,
+				09A927D51D606BE90036C08C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -193,6 +265,7 @@
 				TargetAttributes = {
 					09383B8F1D5FDAFD00F5EF50 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 3S34N6TE7V;
 					};
 					09383BA31D5FDAFD00F5EF50 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -256,7 +329,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09383B961D5FDAFD00F5EF50 /* ViewController.swift in Sources */,
+				09383BC81D5FDBEA00F5EF50 /* SearchViewLogic.swift in Sources */,
+				09383BC61D5FDBBB00F5EF50 /* SearchViewController.swift in Sources */,
+				09383BCA1D5FDC0600F5EF50 /* API.swift in Sources */,
 				09383B941D5FDAFD00F5EF50 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,10 +476,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = DrBilliOSQuiz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shohe1218.DrBilliOSQuiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -412,10 +494,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = DrBilliOSQuiz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shohe1218.DrBilliOSQuiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -484,6 +573,7 @@
 				09383BBA1D5FDAFD00F5EF50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		09383BBB1D5FDAFD00F5EF50 /* Build configuration list for PBXNativeTarget "DrBilliOSQuizTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +582,7 @@
 				09383BBD1D5FDAFD00F5EF50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		09383BBE1D5FDAFD00F5EF50 /* Build configuration list for PBXNativeTarget "DrBilliOSQuizUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +591,7 @@
 				09383BC01D5FDAFD00F5EF50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

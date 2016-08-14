@@ -1,0 +1,7 @@
+## Alamofire
+## source: https://github.com/Alamofire/Alamofire
+github "Alamofire/Alamofire"
+
+## BrightFutures
+## source: https://github.com/SwiftyJSON/SwiftyJSON 
+github "SwiftyJSON/SwiftyJSON"
