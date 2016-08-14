@@ -38,6 +38,10 @@
                             <constraint firstItem="nVJ-e8-N5e" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="s1T-QR-tMc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="_searchBar" destination="nVJ-e8-N5e" id="V2K-od-8hZ"/>
+                        <outlet property="_tableView" destination="9Lq-c2-83t" id="49g-NO-PUv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
