@@ -14,7 +14,7 @@ protocol SearchView: class {
 }
 
 class SearchViewLogic: NSObject {
-    
+    private let queue = NSOperationQueue()
     weak var view: SearchView? = nil
     
     func viewDidLoad() {
@@ -45,7 +45,7 @@ extension SearchViewLogic: UITableViewDelegate {
 extension SearchViewLogic: UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,6 +58,10 @@ extension SearchViewLogic: UITableViewDataSource {
         return cell
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "\(section)section"
+    }
+    
 }
 
 
@@ -65,8 +69,8 @@ extension SearchViewLogic: UITableViewDataSource {
 extension SearchViewLogic: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        //API.getMusicRequest(searchText)
-        API.getBookRequest(searchText)
+        cancelFetch()
+        fetch(searchText)
     }
     
     
@@ -83,4 +87,19 @@ extension SearchViewLogic {
         view?.searchBar?.delegate = self
     }
     
+    private func fetch(key: String) {
+        let fetchMusicOperation = NSBlockOperation { API.getMusicRequest(key) }
+        let fetchBookOperation = NSBlockOperation { API.getBookRequest(key) }
+        
+        fetchBookOperation.addDependency(fetchMusicOperation)
+        
+        queue.addOperation(fetchMusicOperation)
+        queue.addOperation(fetchBookOperation)
+    }
+    
+    private func cancelFetch() {
+        queue.cancelAllOperations()
+    }
+    
 }
+
