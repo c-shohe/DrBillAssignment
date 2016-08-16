@@ -14,11 +14,19 @@ protocol SearchView: class {
 }
 
 class SearchViewLogic: NSObject {
-    private let queue = NSOperationQueue()
+    private var queue: NSOperationQueue!
+    private let operationKey = "operationCount"
+    
+    private var items: [[String]] = []
     weak var view: SearchView? = nil
     
     func viewDidLoad() {
         setupView()
+        setObserver()
+    }
+    
+    deinit {
+        queue.removeObserver(self, forKeyPath: operationKey)
     }
 }
 
@@ -45,16 +53,16 @@ extension SearchViewLogic: UITableViewDelegate {
 extension SearchViewLogic: UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return items.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return items[section].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = "--"
+        cell.textLabel?.text = items[indexPath.section][indexPath.row]
         return cell
     }
     
@@ -87,18 +95,57 @@ extension SearchViewLogic {
         view?.searchBar?.delegate = self
     }
     
+    private func setObserver() {
+        queue = NSOperationQueue()
+        queue.addObserver(self, forKeyPath: operationKey, options: .New, context: nil)
+    }
+    
     private func fetch(key: String) {
-        let fetchMusicOperation = NSBlockOperation { API.getMusicRequest(key) }
-        let fetchBookOperation = NSBlockOperation { API.getBookRequest(key) }
+        let fetchMusicOperation = NSBlockOperation {
+            API.getMusicRequest(key) { (jsonObject) in
+                print(jsonObject)
+            }
+            
+            // table test
+            var musicItem: [String] = []
+            for i in 0..<10 {
+                musicItem.append("music\(i)")
+            }
+            self.items.removeAll()
+            self.items.append(musicItem)
+        }
+        let fetchBookOperation = NSBlockOperation {
+            API.getBookRequest(key) { (jsonObject) in
+                print(jsonObject)
+            }
+            
+            // table test
+            var bookItem: [String] = []
+            for i in 0..<10 {
+                bookItem.append("book\(i)")
+            }
+            self.items.append(bookItem)
+        }
         
         fetchBookOperation.addDependency(fetchMusicOperation)
         
-        queue.addOperation(fetchMusicOperation)
         queue.addOperation(fetchBookOperation)
+        queue.addOperation(fetchMusicOperation)
     }
     
     private func cancelFetch() {
         queue.cancelAllOperations()
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if keyPath == operationKey {
+            let count = change!["new"] as! Int
+            if count == 0 {
+                dispatch_async(dispatch_get_main_queue(), { 
+                    self.view?.tableView?.reloadData()
+                })
+            }
+        }
     }
     
 }

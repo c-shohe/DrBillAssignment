@@ -20,6 +20,8 @@
 		09A927D41D606BE90036C08C /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 09A927D11D606B260036C08C /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		09A927D71D606C210036C08C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A927D61D606C210036C08C /* SwiftyJSON.framework */; };
 		09A927D81D606C210036C08C /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 09A927D61D606C210036C08C /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		09A927DF1D6108970036C08C /* ITunesAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A927DE1D6108970036C08C /* ITunesAPIResponse.swift */; };
+		09A927E11D610BA20036C08C /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A927E01D610BA20036C08C /* Response.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		09383BC91D5FDC0600F5EF50 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		09A927D11D606B260036C08C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		09A927D61D606C210036C08C /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		09A927DE1D6108970036C08C /* ITunesAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesAPIResponse.swift; sourceTree = "<group>"; };
+		09A927E01D610BA20036C08C /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 		09383BC41D5FDB8800F5EF50 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				09A927DD1D6108430036C08C /* Response */,
 				09383BC91D5FDC0600F5EF50 /* API.swift */,
 			);
 			path = API;
@@ -194,6 +199,15 @@
 				09A927D11D606B260036C08C /* Alamofire.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		09A927DD1D6108430036C08C /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				09A927DE1D6108970036C08C /* ITunesAPIResponse.swift */,
+				09A927E01D610BA20036C08C /* Response.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,9 +343,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A927DF1D6108970036C08C /* ITunesAPIResponse.swift in Sources */,
 				09383BC81D5FDBEA00F5EF50 /* SearchViewLogic.swift in Sources */,
 				09383BC61D5FDBBB00F5EF50 /* SearchViewController.swift in Sources */,
 				09383BCA1D5FDC0600F5EF50 /* API.swift in Sources */,
+				09A927E11D610BA20036C08C /* Response.swift in Sources */,
 				09383B941D5FDAFD00F5EF50 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
