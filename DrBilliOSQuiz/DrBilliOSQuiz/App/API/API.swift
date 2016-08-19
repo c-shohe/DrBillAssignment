@@ -24,16 +24,8 @@ final class API {
         manager = Alamofire.Manager(configuration: configuration)
     }
     
-    static func getMusicRequest(key: String, callback: (JSON) -> Void) {
-        API.sharedInstance.manager.request(.GET, "https://itunes.apple.com/search?term=\(key)&media=music&entity=song&country=us&lang=en_us&limit=10", parameters: nil).responseJSON { (response) in
-            if let object = response.result.value {
-                callback(JSON(object))
-            }
-        }
-    }
-    
-    static func getBookRequest(key: String, callback: (JSON) -> Void) {
-        API.sharedInstance.manager.request(.GET, "https://www.googleapis.com/books/v1/volumes?q=\(key)&country=US", parameters: nil).responseJSON { (response) in
+    static func sendRequest(r: RequestType, callback: (JSON) -> Void) {
+        API.sharedInstance.manager.request(r.method, r.buildRequestURL().absoluteString).responseJSON { (response) in
             if let object = response.result.value {
                 callback(JSON(object))
             }
@@ -52,4 +44,14 @@ final class API {
         API.sharedInstance.request?.cancel()
     }
 
+}
+
+
+// MARK: - private method.
+extension API {
+    
+    private func buildRequestURL(requestType: RequestType) -> NSURL {
+        return NSURL()
+    }
+    
 }
