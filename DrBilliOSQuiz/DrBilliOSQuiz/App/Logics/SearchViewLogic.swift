@@ -16,31 +16,18 @@ protocol SearchView: class {
 
 class SearchViewLogic: NSObject {
     private var queue: NSOperationQueue!
-    private var fetchMusicOperation: NSBlockOperation!
-    private var fetchBookOperation: NSBlockOperation!
+    private var fetchMusicOperation, fetchBookOperation: FetchOperation!
+    private var completedOperation: NSBlockOperation!
     private var items: [[QuizItem]] = []
     
     weak var view: SearchView? = nil
     
-    private let operationKey = "operationCount"
-    
     func viewDidLoad() {
         setupView()
-        setObserver()
+        setQueue()
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if keyPath == operationKey {
-            let count = change!["new"] as! Int
-            if count == 0 {
-                reload()
-            }
-        }
-    }
-    
-    deinit {
-        queue.removeObserver(self, forKeyPath: operationKey)
-    }
+    deinit {}
 }
 
 
@@ -74,14 +61,14 @@ extension SearchViewLogic: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")
         let item = items[indexPath.section][indexPath.row]
-        cell.textLabel?.text = item.title
-        return cell
+        cell!.textLabel?.text = item.title
+        return cell!
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(section)section"
+        return (section == 0) ? "Music" : (section == 1) ? "Book" : ""
     }
     
 }
@@ -95,6 +82,9 @@ extension SearchViewLogic: UISearchBarDelegate {
         fetch(searchText)
     }
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
     
 }
 
@@ -109,28 +99,41 @@ extension SearchViewLogic {
         view?.searchBar?.delegate = self
     }
     
-    private func setObserver() {
+    private func setQueue() {
         queue = NSOperationQueue()
         queue.maxConcurrentOperationCount = 1
-        queue.addObserver(self, forKeyPath: operationKey, options: .New, context: nil)
     }
 
     private func fetch(key: String) {
-        fetchMusicOperation = NSBlockOperation() {
-            API.getMusicRequest(key) { (jsonObject) in
-                print("1")
-            }
-        }
-        fetchBookOperation = NSBlockOperation() {
-            API.getBookRequest(key) { (jsonObject) in
-                print("2")
-            }
-        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        prepareRequest(key)
         
         fetchBookOperation.addDependency(fetchMusicOperation)
-        
+        completedOperation.addDependency(fetchBookOperation)
         queue.addOperation(fetchMusicOperation)
         queue.addOperation(fetchBookOperation)
+        queue.addOperation(completedOperation)
+    }
+    
+    private func prepareRequest(key: String) {
+        fetchMusicOperation = FetchOperation()
+        fetchBookOperation = FetchOperation()
+        
+        let musicRequest = MusicRequest(term: key, media: "music", entity: "song", country: "us", lang: "en_us", limit: 10)
+        fetchMusicOperation.setRequest(musicRequest)
+        
+        let bookRequest = BookRequest(q: key, country: "US")
+        fetchBookOperation.setRequest(bookRequest)
+        
+        initCompletedOperation()
+    }
+    
+    private func initCompletedOperation() {
+        completedOperation = NSBlockOperation {
+            self.items.append(self.fetchMusicOperation.items)
+            self.items.append(self.fetchBookOperation.items)
+            self.reload()
+        }
     }
     
     private func cancelFetch() {
@@ -142,8 +145,10 @@ extension SearchViewLogic {
     private func reload() {
         dispatch_async(dispatch_get_main_queue(), {
             self.view?.tableView?.reloadData()
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         })
     }
     
 }
+
 
